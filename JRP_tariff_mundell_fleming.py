@@ -7,15 +7,11 @@ import plotly.graph_objects as go
 
 st.set_page_config(page_title="Mundell-Fleming Simulator", layout="wide")
 
-st.title("\U0001F4CA Mundell-Fleming Model Simulator")
+st.title("\U0001F4CA The LP Cantina Tariff Model")
 st.markdown("""
 This interactive app lets you explore the effects of tariffs and policy responses on output, interest rates, and the exchange rate
 using a simplified Mundell-Fleming framework (flexible exchange rates, high capital mobility).
 """)
-
-
-
-
 
 
 # --- Sidebar Inputs ---
@@ -103,7 +99,7 @@ E_change = -0.5 * (r0 - r_new) + 0.3 * net_exports_boost  # simplified FX equati
 E_new = E0 + E_change
 
 # --- Display Results ---
-st.subheader("Results Summary")
+st.subheader("Results")
 col1, col2, col3 = st.columns(3)
 col1.metric("Output (Y)", f"{Y_new:.2f}", delta=f"{Y_new - Y0:+.2f}")
 col2.metric("Interest Rate (r)", f"{r_new:.2f}%", delta=f"{r_new - r0:+.2f}%")
@@ -111,7 +107,7 @@ col3.metric("Exchange Rate (E)", f"{E_new:.2f}", delta=f"{E_new - E0:+.2f}")
 
 
 # --- Dynamic Narrative Summary ---
-st.subheader("Narrative Summary")
+st.subheader("Narrative")
 
 description = []
 
@@ -150,30 +146,6 @@ else:
 description.append(fx_outcome)
 
 st.write(" ".join(description))
-
-# --- Coefficient Reference Table ---
-with st.expander("Show Model Coefficients and Interpretations"):
-    coeff_data = {
-        "Coefficient": [
-            "0.8 (IS → Y)",
-            "0.5 (LM → Y)",
-            "-0.3 (LM → r)",
-            "0.2 (IS → r)",
-            "-0.5 (∆r → ∆E)",
-            "0.3 (NX → ∆E)"
-        ],
-        "Meaning": [
-            "Effect of demand shocks on output (fiscal multiplier)",
-            "Effect of monetary easing on output",
-            "Effect of monetary easing on interest rates",
-            "Effect of demand pressure on interest rates",
-            "Effect of interest rate changes on exchange rate",
-            "Effect of net export boost on exchange rate"
-        ]
-    }
-    coeff_df = pd.DataFrame(coeff_data)
-    st.dataframe(coeff_df, use_container_width=True)
-
 
 # --- Plot IS-LM Curves using Plotly ---
 Y_vals = np.linspace(95, 105, 100)
