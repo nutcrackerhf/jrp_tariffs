@@ -7,7 +7,7 @@ import plotly.graph_objects as go
 
 st.set_page_config(page_title="Mundell-Fleming Simulator", layout="wide")
 
-st.title("\U0001F4CA The LP Cantina Tariff Model")
+st.title("\U0001F4CA JRP Tariff Effects Model")
 st.markdown("""
 This interactive app lets you explore the effects of tariffs and policy responses on output, interest rates, and the exchange rate
 using a simplified Mundell-Fleming framework (flexible exchange rates, high capital mobility).
